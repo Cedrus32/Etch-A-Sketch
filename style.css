@@ -16,3 +16,7 @@ body {
     border: 1px solid white;
     color: white;
 }
+
+.change-bg {
+    background-color:pink;
+}
