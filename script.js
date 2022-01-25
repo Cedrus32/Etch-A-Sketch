@@ -2,11 +2,8 @@
 // GENERATE GRID //
 // ------------- //
 
-const gridContainer = document.querySelector('div.grid-container');
-//...generate grid
-function genGrid(userInput) {
-    let gridSize = (userInput ** 2)
-    // TODO allow user input for size of grid
+function drawGrid(gridWH) {
+    let gridSize = (gridWH ** 2)
     for (let i=1; i<=gridSize; i++) {
         // create grid item
         const gridItem = document.createElement('div');
@@ -17,8 +14,23 @@ function genGrid(userInput) {
         gridContainer.appendChild(gridItem);
         console.log(gridContainer);
     }
-    gridContainer.style.grid = '50px';
+    // gridContainer.style.grid = '50px';
 }
+
+const layoutGrid = (gridWH) => {
+    gridContainer.style.gridTemplateColumns = `repeat(${gridWH}, 50px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${gridWH}, 50px)`;
+}
+
+const gridContainer = document.querySelector('div.grid-container');
+//...generate grid
+function genGrid(userInput) {
+    //layout grid...
+    layoutGrid(userInput);
+    //draw grid...
+    drawGrid(userInput);
+}
+
 // ----------- //
 // INIT SCRIPT //
 // ----------- //

@@ -4,7 +4,7 @@ body {
 
 .grid-container {
     display: grid;
-    grid: auto / auto auto auto;
+    /* grid: auto / auto auto auto; */
 }
 
 .grid-item {
