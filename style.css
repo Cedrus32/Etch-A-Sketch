@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+}
+
+.grid-container {
+    display: grid;
+}
+
+.grid-item {
+    /* background-color: black; */
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+}
