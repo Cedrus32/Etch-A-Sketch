@@ -3,9 +3,11 @@
 // ------------- //
 
 const gridContainer = document.querySelector('div.grid-container');
-function genGrid() {
+//...generate grid
+function genGrid(userInput) {
+    let gridSize = (userInput ** 2)
     // TODO allow user input for size of grid
-    for (let i=1; i<=16; i++) {
+    for (let i=1; i<=gridSize; i++) {
         // create grid item
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
@@ -15,9 +17,13 @@ function genGrid() {
         gridContainer.appendChild(gridItem);
         console.log(gridContainer);
     }
+    gridContainer.style.grid = '50px';
 }
 // ----------- //
 // INIT SCRIPT //
 // ----------- //
 
-let start = genGrid()
+//get input
+let size = prompt('? x ?');
+//generate grid...
+let start = genGrid(size)

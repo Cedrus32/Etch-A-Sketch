@@ -4,11 +4,15 @@ body {
 
 .grid-container {
     display: grid;
+    grid: auto / auto auto auto;
 }
 
 .grid-item {
     /* background-color: black; */
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
     border: 1px solid white;
     color: white;
-    text-align: center;
 }
