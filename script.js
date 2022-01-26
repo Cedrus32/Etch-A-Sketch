@@ -1,9 +1,16 @@
 // ------------- //
+// HOVER EFFECTS //
+// ------------- //
+
+function addHover(div) {
+    div.classList.add('change-bg');
+}
+
+// ------------- //
 // GENERATE GRID //
 // ------------- //
 
 const gridContainer = document.querySelector('div.grid-container');
-let gridItems;
 //...draw grid elements & create array of grid items
 function drawGrid(gridWH) {
     let gridSize = (gridWH ** 2)
@@ -15,10 +22,11 @@ function drawGrid(gridWH) {
         //append grid item to grid container
         gridContainer.appendChild(gridItem);
     }
-    gridItems = gridContainer.querySelectorAll('div.grid-item');
-    //add hover effect
+    let gridItems = gridContainer.querySelectorAll('div.grid-item');
+    //add hover effects...
     gridItems.forEach(div => div.addEventListener('mouseover', (e) => {
         console.log(e);
+        addHover(div);
     }));
 }
 
