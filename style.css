@@ -1,9 +1,18 @@
+html, body {
+    height: 100%;
+}
+
 body {
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid-container {
     display: grid;
+    /* border: solid 1px white; */
+    border: 1px solid white;
     /* grid: auto / auto auto auto; */
 }
 
@@ -13,7 +22,7 @@ body {
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid white;
+    /* border: 1px solid white; */
     color: white;
 }
 

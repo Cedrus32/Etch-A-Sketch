@@ -1,3 +1,7 @@
+// --------------- //
+// CONTROL BUTTONS //
+// --------------- //
+
 // ------------- //
 // HOVER EFFECTS //
 // ------------- //
@@ -18,7 +22,6 @@ function drawGrid(gridWH) {
         //create grid item
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
-        gridItem.textContent = i;
         //append grid item to grid container
         gridContainer.appendChild(gridItem);
     }
@@ -32,8 +35,8 @@ function drawGrid(gridWH) {
 
 //...layout grid structure
 const layoutGrid = (gridWH) => {
-    gridContainer.style.gridTemplateColumns = `repeat(${gridWH}, 50px)`;
-    gridContainer.style.gridTemplateRows = `repeat(${gridWH}, 50px)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${gridWH}, 10px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${gridWH}, 10px)`;
 }
 
 //...generate grid
@@ -45,10 +48,30 @@ function genGrid(userInput) {
 }
 
 // ----------- //
-// INIT SCRIPT //
+// INIT SCRIPTS //
 // ----------- //
 
-//get input
-let size = prompt('? x ?');
-//generate grid...
-let start = genGrid(size)
+let size;
+//...get width/height --> size
+function getWH() {
+    const maxWH = 75;
+    const minWH = 10;
+    console.log(size);
+    while (!(size <= maxWH && size >= minWH)) {
+        size = prompt('? x ?');
+    }
+    return size;
+}
+
+function startSketch() {
+    //get width/height...
+    getWH();
+    //generate grid...
+    genGrid(size);
+}
+
+// --------------- //
+// START SKETCHING //
+// --------------- //
+
+let start = startSketch();
