@@ -1,20 +1,23 @@
-// --------------- //
-// CONTROL BUTTONS //
-// --------------- //
-
 // ------------- //
 // HOVER EFFECTS //
 // ------------- //
 
-function addHover(div) {
-    div.classList.add('change-bg');
-}
+// function addHover(div) {
+//     div.classList.add('change-bg');
+// }
+
+// //add hover effects...
+// gridItems.forEach(div => div.addEventListener('mouseover', (e) => {
+//     console.log(e);
+//     addHover(div);
+// }));
 
 // ------------- //
 // GENERATE GRID //
 // ------------- //
 
 const gridContainer = document.querySelector('div.grid-container');
+let gridItems;
 //...draw grid elements & create array of grid items
 function drawGrid(gridWH) {
     let gridSize = (gridWH ** 2)
@@ -25,16 +28,12 @@ function drawGrid(gridWH) {
         //append grid item to grid container
         gridContainer.appendChild(gridItem);
     }
-    let gridItems = gridContainer.querySelectorAll('div.grid-item');
-    //add hover effects...
-    gridItems.forEach(div => div.addEventListener('mouseover', (e) => {
-        console.log(e);
-        addHover(div);
-    }));
+    gridItems = gridContainer.querySelectorAll('div.grid-item');
+    return gridItems;
 }
 
 //...layout grid structure
-const layoutGrid = (gridWH) => {
+const styleGrid = (gridWH) => {
     gridContainer.style.gridTemplateColumns = `repeat(${gridWH}, 10px)`;
     gridContainer.style.gridTemplateRows = `repeat(${gridWH}, 10px)`;
 }
@@ -42,9 +41,12 @@ const layoutGrid = (gridWH) => {
 //...generate grid
 function genGrid(userInput) {
     //layout grid...
-    layoutGrid(userInput);
+    styleGrid(userInput);
     //draw grid...
     drawGrid(userInput);
+    console.log(gridItems);
+    //add effects...
+    addEffects(gridItems);
 }
 
 // ----------- //
@@ -56,7 +58,6 @@ let size;
 function getWH() {
     const maxWH = 75;
     const minWH = 10;
-    console.log(size);
     while (!(size <= maxWH && size >= minWH)) {
         size = prompt('? x ?');
     }
@@ -66,6 +67,7 @@ function getWH() {
 function startSketch() {
     //get width/height...
     getWH();
+    console.log(size);
     //generate grid...
     genGrid(size);
 }
