@@ -10,7 +10,7 @@ html, body {
 body {
     background-color: black;
     display: flex;
-    flex-flow: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -21,6 +21,7 @@ body {
 .header {
     display: flex;
     flex-flow: column;
+    align-self: flex-start;
     justify-content: flex-start;
     align-items: center;
 }
@@ -35,7 +36,7 @@ body {
 /* ---- */
 
 .grid-container {
-    justify-self: center;
+    align-self: center;
     display: grid;
     /* border: solid 1px white; */
     border: 1px solid white;

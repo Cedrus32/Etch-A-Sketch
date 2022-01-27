@@ -49,9 +49,9 @@ function genGrid(userInput) {
     // addEffects(gridItems);
 }
 
-// ----------- //
+// ------------ //
 // INIT SCRIPTS //
-// ----------- //
+// ------------ //
 
 let size;
 //...get width/height --> size
