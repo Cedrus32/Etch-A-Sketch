@@ -45,8 +45,8 @@ function genGrid(userInput) {
     //draw grid...
     drawGrid(userInput);
     console.log(gridItems);
-    //add effects...
-    addEffects(gridItems);
+    // //add effects...
+    // addEffects(gridItems);
 }
 
 // ----------- //
