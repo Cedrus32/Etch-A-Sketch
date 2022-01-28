@@ -2,15 +2,27 @@
 // HOVER EFFECTS //
 // ------------- //
 
-// function addHover(div) {
-//     div.classList.add('change-bg');
-// }
+// in addEffects()
+// conditionals...
+// if click on 'hover button' ... then
+// else if click on 'click button' ... then
+// else if click on 'clear button' ... then
 
-// //add hover effects...
-// gridItems.forEach(div => div.addEventListener('mouseover', (e) => {
-//     console.log(e);
-//     addHover(div);
-// }));
+// TODO get control buttons functional
+// TODO include rainbow color option
+// TODO include color picker from rainbow palette
+
+function addHover(div) {
+    div.classList.add('change-bg');
+}
+
+//add hover effects...
+function addEffects(items) {
+    items.forEach(div => div.addEventListener('mouseover', (e) => {
+        console.log(e);
+        addHover(div);
+    }));
+}
 
 // ------------- //
 // GENERATE GRID //
@@ -44,9 +56,9 @@ function genGrid(userInput) {
     styleGrid(userInput);
     //draw grid...
     drawGrid(userInput);
-    console.log(gridItems);
-    // //add effects...
-    // addEffects(gridItems);
+    // console.log(gridItems);
+    //add effects...
+    addEffects(gridItems);
 }
 
 // ------------ //
@@ -67,7 +79,7 @@ function getWH() {
 function startSketch() {
     //get width/height...
     getWH();
-    console.log(size);
+    // console.log(size);
     //generate grid...
     genGrid(size);
 }
