@@ -56,7 +56,7 @@ function genGrid(userInput) {
 let size;
 //...get width/height --> size
 function getWH() {
-    const maxWH = 75;
+    const maxWH = 70;
     const minWH = 10;
     while (!(size <= maxWH && size >= minWH)) {
         size = prompt('? x ?');

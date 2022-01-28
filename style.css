@@ -25,6 +25,8 @@ body {
     /* align-self: flex-start; */
     justify-content: flex-start;
     align-items: center;
+    height: 100px;
+    /* border: 1px solid red; */
 }
 
 .title {
@@ -35,6 +37,14 @@ body {
 /* ---- */
 /* GRID */
 /* ---- */
+
+.grid-buffer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* border: 1px solid red; */
+    height: 100%;
+}
 
 .grid-container {
     align-self: center;
@@ -53,6 +63,15 @@ body {
     /* border: 1px solid white; */
     color: white;
 }
+
+/* ------ */
+/* FOOTER */
+/* ------ */
+
+/* .footer {
+    height: 200px;
+    border: 1px solid red;
+} */
 
 /* ------- */
 /* EFFECTS */
