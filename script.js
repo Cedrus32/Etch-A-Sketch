@@ -6,35 +6,40 @@
 // TODO include rainbow draw
 // TODO include color picker
 
-function changeBG(gridItems) {
+function changeBG() {
     gridItems.forEach(div => div.addEventListener('mouseenter', () => {
         div.classList.add('change-bg');
     }));
 }
 
-function stopChangeBG(gridItems) {
-    gridContainer.removeEventListener('mouseover', changeBG(gridItems));
+function stopChangeBG() {
+    gridContainer.removeEventListener('mouseover', changeBG);
 }
 
-function startChangeBG(gridItems) {
-    gridContainer.addEventListener('mouseover', changeBG(gridItems));
+function startChangeBG() {
+    gridContainer.addEventListener('mouseover', changeBG);
 }
 
 const btnClear = document.querySelector('#clear');
-console.log(btnClear);
-//add effects...
-function addEffects(gridItems) {
+//listen for effects...
+function listenForEffects() {
     //listen for click...
     gridContainer.addEventListener('click', () => {
         gridContainer.classList.toggle('draw-on');
         if (gridContainer.classList.length === 2) {
-            startChangeBG(gridItems);
+            startChangeBG();
         } else if (gridContainer.classList.length === 1) {
-            stopChangeBG(gridItems);
+            //TODO removeEventListener not working
+            stopChangeBG();
         }
     });
 
+    function clearGrid() {
+        gridItems.forEach(div => div.setAttribute('class', 'grid-item'));
+    }
+
     //listen for clear...
+    btnClear.addEventListener('click', clearGrid);
 }
 
 // ------------- //
@@ -69,9 +74,8 @@ function genGrid(userInput) {
     styleGrid(userInput);
     //draw grid...
     drawGrid(userInput);
-    // console.log(gridItems);
     //add effects...
-    addEffects(gridItems);
+    listenForEffects();
 }
 
 // ------------ //
