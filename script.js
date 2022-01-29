@@ -2,26 +2,32 @@
 // HOVER EFFECTS //
 // ------------- //
 
-// in addEffects()
-// conditionals...
-// if click on 'hover button' ... then
-// else if click on 'click button' ... then
-// else if click on 'clear button' ... then
-
-// TODO get control buttons functional
+// TODO include a global 'click' event on grid to turn off change-bg
 // TODO include rainbow color option
 // TODO include color picker from rainbow palette
 
-function addHover(div) {
-    div.classList.add('change-bg');
+
+function toggleColor(gridItems) {
+    gridItems.forEach(div => div.addEventListener('mouseenter', (e) => {
+        console.log(e);
+        // changeBG(div);
+        div.classList.toggle('change-bg');
+    }));
 }
 
-//add hover effects...
-function addEffects(items) {
-    items.forEach(div => div.addEventListener('mouseover', (e) => {
+// buttons
+const btnClear = document.querySelector('#clear');
+console.log(btnClear);
+
+//add effects...
+function addEffects(gridItems) {
+    //listen for click...
+    gridContainer.addEventListener('click', (e) => {
         console.log(e);
-        addHover(div);
-    }));
+        toggleColor(gridItems);
+    });
+
+    //listen for clear...
 }
 
 // ------------- //
