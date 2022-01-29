@@ -3,28 +3,35 @@
 // ------------- //
 
 // TODO include a global 'click' event on grid to turn off change-bg
-// TODO include rainbow color option
-// TODO include color picker from rainbow palette
+// TODO include rainbow draw
+// TODO include color picker
 
-
-function toggleColor(gridItems) {
-    gridItems.forEach(div => div.addEventListener('mouseenter', (e) => {
-        console.log(e);
-        // changeBG(div);
-        div.classList.toggle('change-bg');
+function changeBG(gridItems) {
+    gridItems.forEach(div => div.addEventListener('mouseenter', () => {
+        div.classList.add('change-bg');
     }));
 }
 
-// buttons
+function stopChangeBG(gridItems) {
+    gridContainer.removeEventListener('mouseover', changeBG(gridItems));
+}
+
+function startChangeBG(gridItems) {
+    gridContainer.addEventListener('mouseover', changeBG(gridItems));
+}
+
 const btnClear = document.querySelector('#clear');
 console.log(btnClear);
-
 //add effects...
 function addEffects(gridItems) {
     //listen for click...
-    gridContainer.addEventListener('click', (e) => {
-        console.log(e);
-        toggleColor(gridItems);
+    gridContainer.addEventListener('click', () => {
+        gridContainer.classList.toggle('draw-on');
+        if (gridContainer.classList.length === 2) {
+            startChangeBG(gridItems);
+        } else if (gridContainer.classList.length === 1) {
+            stopChangeBG(gridItems);
+        }
     });
 
     //listen for clear...
@@ -71,27 +78,28 @@ function genGrid(userInput) {
 // INIT SCRIPTS //
 // ------------ //
 
-let size;
-//...get width/height --> size
-function getWH() {
-    const maxWH = 70;
-    const minWH = 10;
-    while (!(size <= maxWH && size >= minWH)) {
-        size = prompt('? x ?');
-    }
-    return size;
-}
+//TODO uncomment after debug
+// let size;
+// //...get width/height --> size
+// function getWH() {
+//     const maxWH = 70;
+//     const minWH = 10;
+//     while (!(size <= maxWH && size >= minWH)) {
+//         size = prompt('? x ?');
+//     }
+//     return size;
+// }
 
 function startSketch() {
     //get width/height...
-    getWH();
-    // console.log(size);
+    //TODO uncomment after debug
+    // getWH();
     //generate grid...
-    genGrid(size);
+    //TODO 40 --> size after debug
+    genGrid(40);
 }
 
 // --------------- //
 // START SKETCHING //
 // --------------- //
-
 let start = startSketch();
