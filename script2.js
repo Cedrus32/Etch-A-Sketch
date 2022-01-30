@@ -20,16 +20,27 @@
 // LISTEN FOR DRAW & EFFECTS //
 // ------------------------- //
 
-//...clear grid
-function clearGrid() {
-    gridItems.forEach(div => div.style.backgroundColor = 'transparent');
-}
-
-//...erase
+//...erase color
 function drawErase() {
     gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        div.style.backgroundColor = 'transparent';
+        div.style.backgroundColor = '';
     }));
+}
+
+//...clear grid & reset draw...
+function clearGrid() {
+    //set all gridItem BGs to ''
+    gridItems.forEach(div => div.style.backgroundColor = '');
+    //reset gridContainer class list
+    gridContainer.setAttribute('class', 'grid-container')
+    drawOn = false;
+    //stop listening for draw mode switch-case on mouseover --> erase
+    gridContainer.removeEventListener('mouseover', startDraw);
+    drawErase();
+
+    console.log(mode);
+    console.log(color);
+    console.log(drawOn);
 }
 
 //...draw in rainbow color
@@ -46,41 +57,46 @@ function drawPicker() {
     }));
 }
 
+//...switch-case on mouseover...
 function startDraw() {
-    console.log('mouseover')
     switch (mode) {
         case 'picker':
-            console.log(mode);
             drawPicker();
             break;
         case 'rainbow':
-            console.log(mode);
             drawRainbow();
     }
 }
 
-//...toggle draw...
+//...toggle draw
 function toggleDraw() {
+    gridContainer.classList.toggle('draw');
+    drawOn = gridContainer.classList.contains('draw');
+    return drawOn
+}
+
+//...check draw on...
+let mode;
+let color;
+let drawOn;
+let clear;
+function checkDrawOn() {
     gridContainer.addEventListener('click', () => {
-        //toggle gridContainer.draw
-        gridContainer.classList.toggle('draw')
-        let drawOn = gridContainer.classList.contains('draw');
-        console.log(gridContainer.classList);
+        //toggle draw class...
+        toggleDraw();
     
+        console.log(mode);
+        console.log(color);
+        console.log(drawOn);
+
         //check if draw is truthy/falsey...
         if (drawOn === true) {
-            //listen for draw mode switch-case on mouseover
+            //listen for draw mode switch-case on mouseover --> draw
             gridContainer.addEventListener('mouseover', startDraw);
         } else if (drawOn === false) {
-            //stop listening for draw mode switch-case on mouseover
+            //stop listening for draw mode switch-case on mouseover --> erase
             gridContainer.removeEventListener('mouseover', startDraw);
-            //TODO removeEventListener from gridItems
-            gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-                //TODO stops coloring, but also erases existing color
-                //TODO add conditional to check if div already has bg styling?
-                //TODO if yes --> skip, else if no --> run as normal
-                div.style.backgroundColor = '';
-            }));
+            drawErase();
         }
     });
 }
@@ -100,23 +116,20 @@ function listenForEffects() {
         mode = 'rainbow';
         color = '"red"';
     });
-    //listen for clear & clear grid...
+    //listen for clear & clear grid/reset draw...
     btnClear.addEventListener('click', () => {
         // mode = 'clear';
-        // color = '"transparent"';
+        // color = '';
         clearGrid();
-        gridContainer.removeEventListener('mouseover', startDraw);
     });
 }
 
-//...listen for draw
-let mode;
-let color;
-function listenForDraw() {
+//...initiate draw...
+function initDraw() {
     //listen for draw effects...
     listenForEffects();
     //toggle draw...
-    toggleDraw();
+    checkDrawOn();
 }
 
 // ------------- //
@@ -175,9 +188,8 @@ function startSketch() {
     //generate grid...
     //TODO 40 --> size after debug
     genGrid(40);
-    //listen for effects...
-    listenForDraw();
-    //TODO might need to add a while loop to continuously check on each click?
+    //initiate draw...
+    initDraw();
 }
 
 let start = startSketch();
