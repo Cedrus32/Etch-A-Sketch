@@ -77,6 +77,10 @@ body {
 /* EFFECTS */
 /* ------- */
 
-.change-bg {
-    background-color:pink;
+.picker-bg {
+    background-color: white;
+}
+
+.rainbow-bg {
+    background-color: red;
 }

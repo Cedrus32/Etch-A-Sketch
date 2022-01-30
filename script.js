@@ -1,43 +1,88 @@
 // ------------- //
-// HOVER EFFECTS //
+// DRAW EFFECTS //
 // ------------- //
 
-// TODO include a global 'click' event on grid to turn off change-bg
 // TODO include rainbow draw
 // TODO include color picker
 
 function changeBG() {
-    gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        div.classList.add('change-bg');
-    }));
+    switch (colorMode) {
+        case 'rainbow':
+            gridItems.forEach(div => div.addEventListener('mouseover', () => {
+                div.classList.add('red-bg');
+                // div.style.backgroundColor = 'red';
+            }));
+            break;
+        case '':
+            gridItems.forEach(div => div.addEventListener('mouseover', () => {
+                div.classList.add('white-bg');
+                // div.style.backgroundColor = 'white';
+            }));
+    }
+    // gridItems.forEach(div => div.addEventListener('mouseover', () => {
+    //     div.classList.add('change-bg');
+    // }));
 }
 
 function stopChangeBG() {
     gridContainer.removeEventListener('mouseover', changeBG);
+    // gridItems.forEach(div => div.addEventListener('mouseenter', () => {
+    //     div.style.backgroundColor = '';
+    // }));
 }
 
 function startChangeBG() {
     gridContainer.addEventListener('mouseover', changeBG);
+    // gridItems.forEach(div => div.addEventListener('mouseenter', () => {
+    //     div.style.backgroundColor = 'pink';
+    // }));
 }
 
-const btnClear = document.querySelector('#clear');
+function clearGrid() {
+    gridItems.forEach(div => div.setAttribute('class', 'grid-item'));
+    // gridItems.forEach(div => () => {
+    //     div.style.backgroundColor = '';
+    // });
+    gridContainer.setAttribute('class', 'grid-container');
+    console.log(false);
+}
+
+let colorMode;
 //listen for effects...
 function listenForEffects() {
-    //listen for click...
+    //listen for container click...
     gridContainer.addEventListener('click', () => {
         gridContainer.classList.toggle('draw-on');
-        if (gridContainer.classList.length === 2) {
-            startChangeBG();
-        } else if (gridContainer.classList.length === 1) {
-            //TODO removeEventListener not working
-            stopChangeBG();
+        // let classListLength = gridContainer.classList.length;
+        let drawOn = gridContainer.classList.contains('draw-on');
+        switch (drawOn) {
+            case true:
+                console.log(drawOn);
+                startChangeBG(colorMode);
+                break;
+            case false:
+                //TODO removeEventListener does not work
+                console.log(drawOn);
+                stopChangeBG(colorMode);
         }
     });
 
-    function clearGrid() {
-        gridItems.forEach(div => div.setAttribute('class', 'grid-item'));
-    }
+    const btnPicker = document.querySelector('#picker');
+    //listen for picker...
+    btnPicker.addEventListener('click', () => {
+        colorMode = '';
+        console.log(colorMode);
+    });
 
+    //TODO colorMode does not work
+    const btnRainbow = document.querySelector('#rainbow');
+    //listen for rainbow...
+    btnRainbow.addEventListener('click', () => {
+        colorMode += 'rainbow';
+        console.log(colorMode);
+    });
+
+    const btnClear = document.querySelector('#clear');
     //listen for clear...
     btnClear.addEventListener('click', clearGrid);
 }
