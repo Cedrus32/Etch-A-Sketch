@@ -22,14 +22,19 @@
 
 //...clear grid
 function clearGrid() {
-    // gridItems.forEach(div => div.setAttribute('class', 'grid-item'));
     gridItems.forEach(div => div.style.backgroundColor = 'transparent');
+}
+
+//...erase
+function drawErase() {
+    gridItems.forEach(div => div.addEventListener('mouseenter', () => {
+        div.style.backgroundColor = 'transparent';
+    }));
 }
 
 //...draw in rainbow color
 function drawRainbow() {
     gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        // div.classList.add('rainbow-bg');
         div.style.backgroundColor = 'red';
     }));
 }
@@ -37,76 +42,81 @@ function drawRainbow() {
 //...draw in picker color
 function drawPicker() {
     gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        // div.classList.add('picker-bg');
         div.style.backgroundColor = 'white';
     }));
 }
 
-//TODO rename -- contains switch/cases
-function leDebug() {
+function startDraw() {
     console.log('mouseover')
     switch (mode) {
         case 'picker':
             console.log(mode);
-            //TODO drawPicker();
+            drawPicker();
             break;
         case 'rainbow':
             console.log(mode);
-            //TODO drawRainbow();
-            break;
-        case 'clear':
-            console.log(mode);
-            //TODO clearGrid();
+            drawRainbow();
     }
 }
 
 //...toggle draw...
 function toggleDraw() {
-    //toggle gridContainer.draw
-    gridContainer.classList.toggle('draw')
-    let drawOn = gridContainer.classList.contains('draw');
-    console.log(gridContainer.classList);
-
-    //check if draw is truthy/falsey...
-    if (drawOn === true) {
-        console.log(drawOn);
-        //listen for draw mode switch-case on mouseover
-        //TODO rename 'leDebug' -- contains switch/cases
-        gridContainer.addEventListener('mouseover', leDebug);
-    } else if (drawOn === false) {
-        //stop listening for draw mode switch-case on mouseover
-        console.log(drawOn);
-        gridContainer.removeEventListener('mouseover', leDebug);
-    }
+    gridContainer.addEventListener('click', () => {
+        //toggle gridContainer.draw
+        gridContainer.classList.toggle('draw')
+        let drawOn = gridContainer.classList.contains('draw');
+        console.log(gridContainer.classList);
+    
+        //check if draw is truthy/falsey...
+        if (drawOn === true) {
+            //listen for draw mode switch-case on mouseover
+            gridContainer.addEventListener('mouseover', startDraw);
+        } else if (drawOn === false) {
+            //stop listening for draw mode switch-case on mouseover
+            gridContainer.removeEventListener('mouseover', startDraw);
+            //TODO removeEventListener from gridItems
+            gridItems.forEach(div => div.addEventListener('mouseenter', () => {
+                //TODO stops coloring, but also erases existing color
+                //TODO add conditional to check if div already has bg styling?
+                //TODO if yes --> skip, else if no --> run as normal
+                div.style.backgroundColor = '';
+            }));
+        }
+    });
 }
 
 //...listen for draw effects...
 const btnPicker = document.querySelector('#picker');
 const btnRainbow = document.querySelector('#rainbow');
 const btnClear = document.querySelector('#clear');
-//TODO pull out draw functions to a switch -- cases by mode value
 function listenForEffects() {
     //listen for picker & draw in picker color...
     btnPicker.addEventListener('click', () => {
         mode = 'picker';
+        color = '"white"';
     });
     //listen for rainbow & draw in rainbow color...
     btnRainbow.addEventListener('click', () => {
         mode = 'rainbow';
+        color = '"red"';
     });
     //listen for clear & clear grid...
     btnClear.addEventListener('click', () => {
-        mode = 'clear';
+        // mode = 'clear';
+        // color = '"transparent"';
+        clearGrid();
+        gridContainer.removeEventListener('mouseover', startDraw);
     });
 }
 
 //...listen for draw
 let mode;
+let color;
 function listenForDraw() {
     //listen for draw effects...
     listenForEffects();
     //toggle draw...
-    gridContainer.addEventListener('click', toggleDraw);
+    toggleDraw();
 }
 
 // ------------- //
