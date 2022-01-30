@@ -42,8 +42,22 @@ function drawPicker() {
     }));
 }
 
+//TODO rename -- contains switch/cases
 function leDebug() {
     console.log('mouseover')
+    switch (mode) {
+        case 'picker':
+            console.log(mode);
+            //TODO drawPicker();
+            break;
+        case 'rainbow':
+            console.log(mode);
+            //TODO drawRainbow();
+            break;
+        case 'clear':
+            console.log(mode);
+            //TODO clearGrid();
+    }
 }
 
 //...toggle draw...
@@ -56,12 +70,12 @@ function toggleDraw() {
     //check if draw is truthy/falsey...
     if (drawOn === true) {
         console.log(drawOn);
-        //TODO start listening for gridContainer mouseover --> onmouseover. no change bg
-        //TODO implement switch -- cases by mode value
+        //listen for draw mode switch-case on mouseover
+        //TODO rename 'leDebug' -- contains switch/cases
         gridContainer.addEventListener('mouseover', leDebug);
     } else if (drawOn === false) {
+        //stop listening for draw mode switch-case on mouseover
         console.log(drawOn);
-        //TODO stop listening for gridContainer mouseover --> onmouseover, change bg
         gridContainer.removeEventListener('mouseover', leDebug);
     }
 }
@@ -75,20 +89,14 @@ function listenForEffects() {
     //listen for picker & draw in picker color...
     btnPicker.addEventListener('click', () => {
         mode = 'picker';
-        console.log(mode);
-        //TODO move drawPicker();
     });
     //listen for rainbow & draw in rainbow color...
     btnRainbow.addEventListener('click', () => {
         mode = 'rainbow';
-        console.log(mode);
-        //TODO move drawRainbow();
     });
     //listen for clear & clear grid...
     btnClear.addEventListener('click', () => {
         mode = 'clear';
-        console.log(mode);
-        //TODO move clearGrid();
     });
 }
 
