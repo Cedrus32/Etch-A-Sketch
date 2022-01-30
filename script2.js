@@ -22,53 +22,50 @@
 
 //...clear grid
 function clearGrid() {
-    gridItems.forEach(div => div.setAttribute('class', 'grid-item'));
+    // gridItems.forEach(div => div.setAttribute('class', 'grid-item'));
+    gridItems.forEach(div => div.style.backgroundColor = 'transparent');
 }
 
 //...draw in rainbow color
 function drawRainbow() {
     gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        div.classList.add('rainbow-bg');
+        // div.classList.add('rainbow-bg');
+        div.style.backgroundColor = 'red';
     }));
 }
 
 //...draw in picker color
 function drawPicker() {
     gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        div.classList.add('picker-bg');
+        // div.classList.add('picker-bg');
+        div.style.backgroundColor = 'white';
     }));
 }
 
 //...listen for effects...
-//TODO playing around with switch & passing values to trip EventListeners
 const btnPicker = document.querySelector('#picker');
 const btnRainbow = document.querySelector('#rainbow');
 const btnClear = document.querySelector('#clear');
 let mode;
 function listenForEffects() {
     //listen for picker & draw in picker color...
-        btnPicker.addEventListener('click', () => {
-            mode = 'picker'
-            return mode;
-        });
+    btnPicker.addEventListener('click', () => {
+        mode = 'picker'
+        console.log(mode);
+        drawPicker();
+    });
     //listen for rainbow & draw in rainbow color...
-        btnRainbow.addEventListener('click', () => {
-            mode = 'rainbow';
-            return mode;
-        });
+    btnRainbow.addEventListener('click', () => {
+        mode = 'rainbow';
+        console.log(mode);
+        drawRainbow();
+    });
     //listen for clear & clear grid...
-        btnClear.addEventListener('click', () => {
-            mode = 'clear';
-            return mode;
-        });
-    switch (mode) {
-        case 'picker':
-            drawPicker();
-        case 'rainbow':
-            drawRainbow();
-        case 'clear':
-            clearGrid();
-    }
+    btnClear.addEventListener('click', () => {
+        mode = 'clear';
+        console.log(mode);
+        clearGrid();
+    });
 }
 
 // ------------- //
