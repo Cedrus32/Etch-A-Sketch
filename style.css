@@ -5,15 +5,22 @@
 html, body {
     height: 100% !important;
     padding: 0px; margin: 0px;
-    color: white;
+    color: #D2D2D2;
 }
 
 body {
-    background-color: black;
+    background-color: #122636;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
+}
+
+.sketch-container {
+    background-color: #D64934;
+    padding: 0px 33px; margin: 50px 0px 50px;
+    min-height: 721px;
+    border-radius: 5%;
 }
 
 /* ------ */
@@ -23,16 +30,61 @@ body {
 .header {
     display: flex;
     flex-flow: column;
-    /* align-self: flex-start; */
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    height: 100px;
-    /* border: 1px solid red; */
+    padding: 20px; margin: 0px;
+    font-family: 'sacramento', 'helvetica', sans-serif;
+    font-size: 30px;
+    font-weight: lighter;
 }
 
 .title {
-    color: white;
+    color: #ECB14F;
     padding: 0px; margin: 0px;
+}
+
+#size-input {
+    width: 100%;
+    padding: 5px; margin: -15px 0px 0px;
+    background-color: #E6563F;
+    border-style: none;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+
+input:focus-visible {
+    background-color: #E6563F;
+    outline-style: none;
+}
+
+.buttons {
+    padding: 0px; margin: 0px;
+}
+
+button {
+    background-color: #D64934;
+    border-style: none;
+    border-radius: 5px;
+    color: #D2D2D2;
+}
+
+button:hover {
+    background-color: #E6563F;
+    border-style: none;
+    border-radius: 5px;
+    color: white;
+}
+
+button:active {
+    transform: translate(2px, 2px);
+}
+
+.btnOn {
+    background-color: #E6563F;
+    border-style: none;
+    border-radius: 5px;
+    color: white;
 }
 
 /* ---- */
@@ -42,37 +94,22 @@ body {
 .grid-buffer {
     display: flex;
     justify-content: center;
-    align-content: center;
-    /* border: 1px solid red; */
-    height: 100%;
+    align-items: center;
 }
 
 .grid-container {
     align-self: center;
     display: grid;
-    /* border: solid 1px white; */
-    border: 1px solid white;
-    /* grid: auto / auto auto auto; */
+    border: 1px solid #943021;
+    background-color: #D2D2D2; 
 }
 
 .grid-item {
-    /* background-color: black; */
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid white; */
-    color: white;
 }
-
-/* ------ */
-/* FOOTER */
-/* ------ */
-
-/* .footer {
-    height: 200px;
-    border: 1px solid red;
-} */
 
 /* ------- */
 /* EFFECTS */
@@ -84,4 +121,24 @@ body {
 
 .rainbow-bg {
     background-color: red;
+}
+
+/* ------------ */
+/* CUSTOM FONTS */
+/* ------------ */
+
+@font-face {
+    font-family: 'fortrack-italics'; src: url(./fortrack-italic.otf);
+}
+
+@font-face {
+    font-family: 'scribblebox'; src: url(./scribblebox.ttf);
+}
+
+@font-face {
+    font-family: 'sacramento'; src: url(./scribblebox.ttf);
+}
+
+@font-face {
+    font-family: 'sacramento'; src: url(./sacramento.ttf);
 }

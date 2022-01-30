@@ -47,6 +47,9 @@ function startDraw() {
             break;
         case 'rainbow':
             drawRainbow();
+            break;
+        case 'erase':
+            drawErase();
     }
 }
 
@@ -66,11 +69,7 @@ function checkDrawOn() {
     gridContainer.addEventListener('click', () => {
         //toggle draw class...
         toggleDraw();
-    
-        console.log(mode);
-        console.log(color);
-        console.log(drawOn);
-
+        
         //check if draw is truthy/falsey...
         if (drawOn === true) {
             //listen for draw mode switch-case on mouseover --> draw
@@ -84,10 +83,17 @@ function checkDrawOn() {
 }
 
 //...listen for draw effects...
+const btnErase = document.querySelector('#erase');
 const btnPicker = document.querySelector('#picker');
 const btnRainbow = document.querySelector('#rainbow');
 const btnClear = document.querySelector('#clear');
 function listenForEffects() {
+    //listen for erase & draw in '' (erase)
+    btnErase.addEventListener('click', () => {
+        mode = 'erase';
+        color = ''
+    });
+    
     //listen for picker & draw in picker color...
     btnPicker.addEventListener('click', () => {
         mode = 'picker';
@@ -100,8 +106,6 @@ function listenForEffects() {
     });
     //listen for clear & clear grid/reset draw...
     btnClear.addEventListener('click', () => {
-        // mode = 'clear';
-        // color = '';
         clearGrid();
     });
 }
@@ -169,7 +173,7 @@ function startSketch() {
     // getWH();
     //generate grid...
     //TODO 40 --> size after debug
-    genGrid(40);
+    genGrid(50);
     //initiate draw...
     initDraw();
 }
