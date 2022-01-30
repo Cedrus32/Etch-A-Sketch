@@ -16,9 +16,9 @@
             //case 'rainbow'
             //case 'clear'
 
-// ------------ //
-// DRAW EFFECTS //
-// ------------ //
+// ------------------------- //
+// LISTEN FOR DRAW & EFFECTS //
+// ------------------------- //
 
 //...clear grid
 function clearGrid() {
@@ -42,30 +42,63 @@ function drawPicker() {
     }));
 }
 
-//...listen for effects...
+function leDebug() {
+    console.log('mouseover')
+}
+
+//...toggle draw...
+function toggleDraw() {
+    //toggle gridContainer.draw
+    gridContainer.classList.toggle('draw')
+    let drawOn = gridContainer.classList.contains('draw');
+    console.log(gridContainer.classList);
+
+    //check if draw is truthy/falsey...
+    if (drawOn === true) {
+        console.log(drawOn);
+        //TODO start listening for gridContainer mouseover --> onmouseover. no change bg
+        //TODO implement switch -- cases by mode value
+        gridContainer.addEventListener('mouseover', leDebug);
+    } else if (drawOn === false) {
+        console.log(drawOn);
+        //TODO stop listening for gridContainer mouseover --> onmouseover, change bg
+        gridContainer.removeEventListener('mouseover', leDebug);
+    }
+}
+
+//...listen for draw effects...
 const btnPicker = document.querySelector('#picker');
 const btnRainbow = document.querySelector('#rainbow');
 const btnClear = document.querySelector('#clear');
-let mode;
+//TODO pull out draw functions to a switch -- cases by mode value
 function listenForEffects() {
     //listen for picker & draw in picker color...
     btnPicker.addEventListener('click', () => {
-        mode = 'picker'
+        mode = 'picker';
         console.log(mode);
-        drawPicker();
+        //TODO move drawPicker();
     });
     //listen for rainbow & draw in rainbow color...
     btnRainbow.addEventListener('click', () => {
         mode = 'rainbow';
         console.log(mode);
-        drawRainbow();
+        //TODO move drawRainbow();
     });
     //listen for clear & clear grid...
     btnClear.addEventListener('click', () => {
         mode = 'clear';
         console.log(mode);
-        clearGrid();
+        //TODO move clearGrid();
     });
+}
+
+//...listen for draw
+let mode;
+function listenForDraw() {
+    //listen for draw effects...
+    listenForEffects();
+    //toggle draw...
+    gridContainer.addEventListener('click', toggleDraw);
 }
 
 // ------------- //
@@ -125,7 +158,8 @@ function startSketch() {
     //TODO 40 --> size after debug
     genGrid(40);
     //listen for effects...
-    listenForEffects();
+    listenForDraw();
+    //TODO might need to add a while loop to continuously check on each click?
 }
 
 let start = startSketch();
