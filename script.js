@@ -165,9 +165,11 @@ function getWH() {
 //start sketching...
 function startSketch() {
     //get width/height...
-    getWH();
+    //TODO getWH() uncomment after debug
+    // getWH();
     //generate grid...
-    genGrid(size);
+    //TODO 40 --> size after debug
+    genGrid(40);
     //initiate draw...
     initDraw();
 }
