@@ -20,7 +20,7 @@ body {
 .sketch-container {
     background-color: #D64934;
     padding: 0px 33px; margin: 50px 0px 50px;
-    min-height: 721px;
+    min-height: 721px; width: 502px;
     border-radius: 5%;
 }
 

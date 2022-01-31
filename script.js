@@ -3,53 +3,40 @@
 // ------------------------- //
 
 //...erase color
-function drawErase() {
-    gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        div.style.backgroundColor = '';
-    }));
+function drawErase(e) {
+    e.target.style.backgroundColor = '';
 }
 
 //...clear grid & reset draw...
 function clearGrid() {
-    //set all gridItem BGs to ''
-    gridItems.forEach(div => div.style.backgroundColor = '');
-    //reset gridContainer class list
-    gridContainer.setAttribute('class', 'grid-container')
+    gridItems.forEach(gridItem => {
+        gridItem.style.backgroundColor = '';
+        gridItem.removeEventListener('mouseenter', startDraw);
+    });
     drawOn = false;
-    //stop listening for draw mode switch-case on mouseover --> erase
-    gridContainer.removeEventListener('mouseover', startDraw);
-    drawErase();
-
-    console.log(mode);
-    console.log(color);
-    console.log(drawOn);
 }
 
 //...draw in rainbow color
-function drawRainbow() {
-    gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        div.style.backgroundColor = 'red';
-    }));
+function drawRainbow(e) {
+    e.target.style.backgroundColor = 'red';
 }
 
 //...draw in picker color
-function drawPicker() {
-    gridItems.forEach(div => div.addEventListener('mouseenter', () => {
-        div.style.backgroundColor = 'white';
-    }));
+function drawPicker(e) {
+    e.target.style.backgroundColor = 'white';
 }
 
 //...switch-case on mouseover...
-function startDraw() {
+function startDraw(e) {
     switch (mode) {
         case 'picker':
-            drawPicker();
+            drawPicker(e);
             break;
         case 'rainbow':
-            drawRainbow();
+            drawRainbow(e);
             break;
         case 'erase':
-            drawErase();
+            drawErase(e);
     }
 }
 
@@ -57,27 +44,32 @@ function startDraw() {
 function toggleDraw() {
     gridContainer.classList.toggle('draw');
     drawOn = gridContainer.classList.contains('draw');
+    console.log(drawOn);
     return drawOn
 }
 
 //...check draw on...
 let mode;
 let color;
-let drawOn;
+let drawOn = false;
 let clear;
 function checkDrawOn() {
+    //DRAWON FALSEY BY DEFAULT
     gridContainer.addEventListener('click', () => {
-        //toggle draw class...
-        toggleDraw();
+        console.log(drawOn);
         
+        //TODO change conditionals to reflect drawOn default
         //check if draw is truthy/falsey...
-        if (drawOn === true) {
-            //listen for draw mode switch-case on mouseover --> draw
-            gridContainer.addEventListener('mouseover', startDraw);
-        } else if (drawOn === false) {
-            //stop listening for draw mode switch-case on mouseover --> erase
-            gridContainer.removeEventListener('mouseover', startDraw);
-            drawErase();
+        if (drawOn === false) {
+            gridItems.forEach(gridItem => {
+                gridItem.addEventListener('mouseleave', startDraw);
+            });
+            toggleDraw();
+        } else if (drawOn === true) {
+            gridItems.forEach(gridItem => {
+                gridItem.removeEventListener('mouseleave', startDraw);
+            });
+            toggleDraw();
         }
     });
 }
@@ -87,7 +79,7 @@ const btnErase = document.querySelector('#erase');
 const btnPicker = document.querySelector('#picker');
 const btnRainbow = document.querySelector('#rainbow');
 const btnClear = document.querySelector('#clear');
-function listenForEffects() {
+function getMode() {
     //listen for erase & draw in '' (erase)
     btnErase.addEventListener('click', () => {
         mode = 'erase';
@@ -99,11 +91,13 @@ function listenForEffects() {
         mode = 'picker';
         color = '"white"';
     });
+
     //listen for rainbow & draw in rainbow color...
     btnRainbow.addEventListener('click', () => {
         mode = 'rainbow';
         color = '"red"';
     });
+    
     //listen for clear & clear grid/reset draw...
     btnClear.addEventListener('click', () => {
         clearGrid();
@@ -113,7 +107,7 @@ function listenForEffects() {
 //...initiate draw...
 function initDraw() {
     //listen for draw effects...
-    listenForEffects();
+    getMode();
     //toggle draw...
     checkDrawOn();
 }
@@ -122,13 +116,20 @@ function initDraw() {
 // GENERATE GRID //
 // ------------- //
 
-//...draw grid elements & capture gridItem nodeList
-function drawGrid(size) {
+//...layout grid structure
+const layoutGrid = (size) => {
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 10px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${size}, 10px)`;
+}
+
+//...create grid items & capture gridItem nodeList
+function createItems(size) {
     let gridSize = (size ** 2);
     for (let i = 1; i <= gridSize; i++) {
         //create gridItem
-        const gridItem = document.createElement('div');
+        let gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
+        gridItem.addEventListener('click', startDraw);
         //append gridItem to gridContainer
         gridContainer.appendChild(gridItem);
     }
@@ -136,19 +137,13 @@ function drawGrid(size) {
     return gridItems;
 }
 
-//...layout grid structure
-const layoutGrid = (size) => {
-    gridContainer.style.gridTemplateColumns = `repeat(${size}, 10px)`;
-    gridContainer.style.gridTemplateRows = `repeat(${size}, 10px)`;
-}
-
 //...generate grid...
 const gridContainer = document.querySelector('div.grid-container');
 function genGrid(size) {
+    //create grid items...
+    createItems(size);
     //layout grid...
     layoutGrid(size);
-    //draw grid...
-    drawGrid(size);
 }
 
 //...get width/height
