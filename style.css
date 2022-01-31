@@ -63,6 +63,7 @@ input:focus-visible {
 }
 
 button {
+    padding: 5px; margin: 0px;
     background-color: #D64934;
     border-style: none;
     border-radius: 5px;
