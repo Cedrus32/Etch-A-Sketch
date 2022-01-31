@@ -1,6 +1,6 @@
-// ------------------------- //
-// LISTEN FOR DRAW & EFFECTS //
-// ------------------------- //
+// ------------ //
+// DRAW EFFECTS //
+// ------------ //
 
 //...erase color
 function drawErase(e) {
@@ -9,6 +9,7 @@ function drawErase(e) {
 
 //...clear grid & reset draw...
 function clearGrid() {
+    btns.forEach(btn => btn.setAttribute('class', ''));
     gridItems.forEach(gridItem => {
         gridItem.style.backgroundColor = '';
         gridItem.removeEventListener('mouseenter', startDraw);
@@ -25,6 +26,10 @@ function drawRainbow(e) {
 function drawPicker(e) {
     e.target.style.backgroundColor = 'white';
 }
+
+// --------------- //
+// LISTEN FOR DRAW //
+// --------------- //
 
 //...switch-case on mouseover...
 function startDraw(e) {
@@ -58,7 +63,6 @@ function checkDrawOn() {
     gridContainer.addEventListener('click', () => {
         console.log(drawOn);
         
-        //TODO change conditionals to reflect drawOn default
         //check if draw is truthy/falsey...
         if (drawOn === false) {
             gridItems.forEach(gridItem => {
@@ -74,6 +78,13 @@ function checkDrawOn() {
     });
 }
 
+const btns = document.querySelectorAll('button');
+console.log(btns);
+function selectButton(btnNum) {
+    btns.forEach(btn => btn.setAttribute('class', ''));
+    btns[btnNum].classList.add('btnOn');
+}
+
 //...listen for draw effects...
 const btnErase = document.querySelector('#erase');
 const btnPicker = document.querySelector('#picker');
@@ -84,18 +95,21 @@ function getMode() {
     btnErase.addEventListener('click', () => {
         mode = 'erase';
         color = ''
+        selectButton(0);
     });
     
     //listen for picker & draw in picker color...
     btnPicker.addEventListener('click', () => {
         mode = 'picker';
         color = '"white"';
+        selectButton(1);
     });
 
     //listen for rainbow & draw in rainbow color...
     btnRainbow.addEventListener('click', () => {
         mode = 'rainbow';
         color = '"red"';
+        selectButton(2);
     });
     
     //listen for clear & clear grid/reset draw...
