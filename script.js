@@ -49,7 +49,6 @@ function startDraw(e) {
 function toggleDraw() {
     gridContainer.classList.toggle('draw');
     drawOn = gridContainer.classList.contains('draw');
-    console.log(drawOn);
     return drawOn
 }
 
@@ -61,7 +60,6 @@ let clear;
 function checkDrawOn() {
     //DRAWON FALSEY BY DEFAULT
     gridContainer.addEventListener('click', () => {
-        console.log(drawOn);
         
         //check if draw is truthy/falsey...
         if (drawOn === false) {
@@ -79,7 +77,6 @@ function checkDrawOn() {
 }
 
 const btns = document.querySelectorAll('button');
-console.log(btns);
 function selectButton(btnNum) {
     btns.forEach(btn => btn.setAttribute('class', ''));
     btns[btnNum].classList.add('btnOn');
