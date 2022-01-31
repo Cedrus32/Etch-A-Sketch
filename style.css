@@ -5,6 +5,7 @@
 html, body {
     height: 100% !important;
     padding: 0px; margin: 0px;
+    font-family: 'Helvetica', sans-serif;
     color: #D2D2D2;
 }
 
@@ -33,7 +34,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px; margin: 0px;
-    font-family: 'sacramento', 'helvetica', sans-serif;
+    font-family: 'Sacramento', 'helvetica', sans-serif;
     font-size: 30px;
     font-weight: lighter;
 }
@@ -56,6 +57,10 @@ body {
 input:focus-visible {
     background-color: #E6563F;
     outline-style: none;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: lighter;
+    color: white;
+    letter-spacing: 1px;
 }
 
 .buttons {
@@ -67,7 +72,10 @@ button {
     background-color: #D64934;
     border-style: none;
     border-radius: 5px;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: lighter;
     color: #D2D2D2;
+    letter-spacing: 1px;
 }
 
 button:hover {
@@ -129,17 +137,5 @@ button:active {
 /* ------------ */
 
 @font-face {
-    font-family: 'fortrack-italics'; src: url(./fortrack-italic.otf);
-}
-
-@font-face {
-    font-family: 'scribblebox'; src: url(./scribblebox.ttf);
-}
-
-@font-face {
-    font-family: 'sacramento'; src: url(./scribblebox.ttf);
-}
-
-@font-face {
-    font-family: 'sacramento'; src: url(./sacramento.ttf);
+    font-family: 'Sacramento'; src: url(./sacramento.ttf);
 }
