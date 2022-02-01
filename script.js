@@ -64,12 +64,12 @@ function checkDrawOn() {
         //check if draw is truthy/falsey...
         if (drawOn === false) {
             gridItems.forEach(gridItem => {
-                gridItem.addEventListener('mouseleave', startDraw);
+                gridItem.addEventListener('mouseenter', startDraw);
             });
             toggleDraw();
         } else if (drawOn === true) {
             gridItems.forEach(gridItem => {
-                gridItem.removeEventListener('mouseleave', startDraw);
+                gridItem.removeEventListener('mouseenter', startDraw);
             });
             toggleDraw();
         }
@@ -158,14 +158,30 @@ function genGrid(size) {
 }
 
 //...get width/height
+const sizeInput = document.querySelector('#size-input');
 let size;
 function getWH() {
-    const maxWH = 70;
-    const minWH = 10;
-    while (!(size <= maxWH && size >= minWH)) {
-        size = prompt('? x ?');
-    }
-    return size;
+    const maxWH = 70;   //number
+    const minWH = 10;   //number
+
+    //use input box to get size
+    sizeInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            size = Number(sizeInput.value);
+            console.log(typeof(size));
+            if (size >= minWH && size <= maxWH) {
+                console.log(size);
+                return size;
+            }
+        }
+    });
+
+    // // use popup to get size
+    // while (!(size <= maxWH && size >= minWH)) {
+    //     size = Number(prompt('? x ?'));
+    // }
+    // return size;
+
 }
 
 // --------------- //
@@ -176,10 +192,10 @@ function getWH() {
 function startSketch() {
     //get width/height...
     //TODO getWH() uncomment after debug
-    // getWH();
+    getWH();
     //generate grid...
     //TODO 40 --> size after debug
-    genGrid(50);
+    genGrid(size);
     //initiate draw...
     initDraw();
 }
