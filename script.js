@@ -127,13 +127,8 @@ function initDraw() {
 // GENERATE GRID //
 // ------------- //
 
-//TODO -- rewrite to change the size of ** each gridItem **
-
 ///...layout grid structure
 function layoutGrid(gridWH, itemSize) {
-    console.log(gridContainer);
-    console.log(gridWH);
-    console.log(itemSize);
     gridContainer.style.gridTemplateColumns = `repeat(${gridWH}, ${itemSize}px)`;
     gridContainer.style.gridTemplateRows = `repeat(${gridWH}, ${itemSize}px)`;
 }
@@ -146,40 +141,37 @@ function createItems() {
     for (let i = 1; i <= gridSize; i++) {
         //create gridItems
         let gridItem = document.createElement('div');
-        console.log(gridItem);
         gridItem.classList.add('grid-item');
         gridItem.addEventListener('click', startDraw);
         //append gridItem to gridContainer
         gridContainer.appendChild(gridItem);
     }
     gridItems = gridContainer.querySelectorAll('div.grid-item');
-    console.log(gridItems);
     return gridItems;
 }
 
 //...generate grid...
 const gridContainer = document.querySelector('div.grid-container');
 const sizeInput = document.querySelector('#size-input'); //from slider
+const sliderThumb = document.querySelector('input.slider::-webkit-slider-thumb');
 let gridWH; //# items >>/vv
 function genGrid() {
-    //use slider to get size
-    gridWH = Number(sizeInput.value);
-    //create gridItems, append to gridContainer...
-    createItems(gridWH);
-    //layout items in grid...
-    layoutGrid(gridWH, itemSize);
+    sizeInput.addEventListener('mouseup', (e) => {
+        //TODO clear grid when changing size
+        //use slider to get size
+        gridWH = Number(sizeInput.value);
+        //create gridItems, append to gridContainer...
+        createItems(gridWH);
+        //layout items in grid...
+        layoutGrid(gridWH, itemSize);
+        //initiate draw...
+        //TODO add default state of 50 gridWH
+        initDraw();
+    });
 }
 
 // --------------- //
 // START SKETCHING //
 // --------------- //
 
-//start sketching...
-function startSketch() {
-    //get generate grid...
-    genGrid();
-    //initiate draw...
-    initDraw();
-}
-
-let start = startSketch();
+let start = genGrid();
