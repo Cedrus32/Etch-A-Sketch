@@ -129,49 +129,45 @@ function initDraw() {
 
 //TODO -- rewrite to change the size of ** each gridItem **
 
-//...layout grid structure
-const layoutGrid = (size) => {
-    gridContainer.style.gridTemplateColumns = `repeat(${size}, 10px)`;
-    gridContainer.style.gridTemplateRows = `repeat(${size}, 10px)`;
+///...layout grid structure
+function layoutGrid(gridWH, itemSize) {
+    console.log(gridContainer);
+    console.log(gridWH);
+    console.log(itemSize);
+    gridContainer.style.gridTemplateColumns = `repeat(${gridWH}, ${itemSize}px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${gridWH}, ${itemSize}px)`;
 }
 
 //...create grid items & capture gridItem nodeList
-function createItems(size) {
-    let gridSize = (size ** 2);
+let itemSize;
+function createItems() {
+    itemSize = (500 / gridWH);
+    gridSize = (gridWH ** 2);
     for (let i = 1; i <= gridSize; i++) {
-        //create gridItem
+        //create gridItems
         let gridItem = document.createElement('div');
+        console.log(gridItem);
         gridItem.classList.add('grid-item');
         gridItem.addEventListener('click', startDraw);
         //append gridItem to gridContainer
         gridContainer.appendChild(gridItem);
     }
     gridItems = gridContainer.querySelectorAll('div.grid-item');
+    console.log(gridItems);
     return gridItems;
 }
 
 //...generate grid...
-const sizeInput = document.querySelector('#size-input');
 const gridContainer = document.querySelector('div.grid-container');
-let size = 50;
+const sizeInput = document.querySelector('#size-input'); //from slider
+let gridWH; //# items >>/vv
 function genGrid() {
-    const minWH = 10;   //min # squares / side
-    const maxWH = 50;   //max # of squares / side
-
-    createItems(size);
-    layoutGrid(size)
-
-    // //use input box to get size
-    // sizeInput.addEventListener('keyup', (e) => {
-    //     if (e.key === 'Enter') {
-    //         size = Number(sizeInput.value);
-    //         // console.log(typeof(size));
-    //         if (size >= minWH && size <= maxWH) {
-    //             createItems(size);
-    //             layoutGrid(size);
-    //         }
-    //     }
-    // });
+    //use slider to get size
+    gridWH = Number(sizeInput.value);
+    //create gridItems, append to gridContainer...
+    createItems(gridWH);
+    //layout items in grid...
+    layoutGrid(gridWH, itemSize);
 }
 
 // --------------- //
