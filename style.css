@@ -28,9 +28,9 @@ body {
     border-radius: 5%;
 }
 
-/* ------ */
-/* HEADER */
-/* ------ */
+/* --------------- */
+/* HEADER -- TITLE */
+/* --------------- */
 
 .header {
     display: flex;
@@ -49,24 +49,34 @@ body {
     padding: 0px; margin: 0px;
 }
 
+/* ---------------- */
+/* HEADER -- SLIDER */
+/* ---------------- */
+
 #size-input {
     width: 100%;
-    padding: 5px; margin: -15px 0px 0px;
-    background-color: #E6563F;
-    border-style: none;
-    border-radius: 5px;
-    text-align: center;
-    color: white;
+    padding: 5px; margin: -10px 0px 0px;
 }
 
-input:focus-visible {
+.slider {
+    -webkit-appearance: none;
+    height: 1px;
+    border-radius: 5px;
     background-color: #E6563F;
-    outline-style: none;
-    font-family: 'Helvetica', sans-serif;
-    font-weight: lighter;
-    color: white;
-    letter-spacing: 1px;
 }
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 17px;
+    height: 17px;
+    border-style: none;
+    border-radius: 50%;
+    background-color: #D2D2D2;
+}
+
+/* ----------------- */
+/* HEADER -- BUTTONS */
+/* ----------------- */
 
 .buttons {
     padding: 0px; margin: 0px;
@@ -131,13 +141,13 @@ button:active {
 /* EFFECTS */
 /* ------- */
 
-.picker-bg {
+/* .picker-bg {
     background-color: white;
 }
 
 .rainbow-bg {
     background-color: red;
-}
+} */
 
 /* ------------ */
 /* CUSTOM FONTS */
