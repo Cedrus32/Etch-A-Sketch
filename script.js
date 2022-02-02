@@ -151,39 +151,27 @@ function createItems(size) {
 }
 
 //...generate grid...
-const gridContainer = document.querySelector('div.grid-container');
-function genGrid(size) {
-    //create grid items...
-    createItems(size);
-    //layout grid...
-    layoutGrid(size);
-}
-
-//...get width/height
 const sizeInput = document.querySelector('#size-input');
-let size;
-function getWH() {
-    const maxWH = 50;   //number
-    const minWH = 10;   //number
+const gridContainer = document.querySelector('div.grid-container');
+let size = 50;
+function genGrid() {
+    const minWH = 10;   //min # squares / side
+    const maxWH = 50;   //max # of squares / side
 
-    //use input box to get size
-    sizeInput.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') {
-            size = Number(sizeInput.value);
-            // console.log(typeof(size));
-            if (size >= minWH && size <= maxWH) {
-                // console.log(size);
-                genGrid(size);
-            }
-        }
-    });
+    createItems(size);
+    layoutGrid(size)
 
-    // //use popup to get size
-    // while (!(size <= maxWH && size >= minWH)) {
-    //     size = Number(prompt('? x ?'));
-    // }
-    // // return size;
-
+    // //use input box to get size
+    // sizeInput.addEventListener('keyup', (e) => {
+    //     if (e.key === 'Enter') {
+    //         size = Number(sizeInput.value);
+    //         // console.log(typeof(size));
+    //         if (size >= minWH && size <= maxWH) {
+    //             createItems(size);
+    //             layoutGrid(size);
+    //         }
+    //     }
+    // });
 }
 
 // --------------- //
@@ -192,10 +180,8 @@ function getWH() {
 
 //start sketching...
 function startSketch() {
-    //get width/height...
-    getWH();
-    //generate grid...
-    // genGrid(size);
+    //get generate grid...
+    genGrid();
     //initiate draw...
     initDraw();
 }
