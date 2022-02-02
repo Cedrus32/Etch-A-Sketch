@@ -18,6 +18,10 @@ body {
 }
 
 .sketch-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
     background-color: #D64934;
     padding: 0px 33px; margin: 50px 0px 50px;
     min-height: 721px; width: 502px;
@@ -37,6 +41,7 @@ body {
     font-family: 'Sacramento', 'helvetica', sans-serif;
     font-size: 30px;
     font-weight: lighter;
+    height: 167px;
 }
 
 .title {
@@ -104,6 +109,8 @@ button:active {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0px 0px 20px; margin: 0px;
+    height: 554px;
 }
 
 .grid-container {

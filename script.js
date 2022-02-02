@@ -127,6 +127,8 @@ function initDraw() {
 // GENERATE GRID //
 // ------------- //
 
+//TODO -- rewrite to change the size of ** each gridItem **
+
 //...layout grid structure
 const layoutGrid = (size) => {
     gridContainer.style.gridTemplateColumns = `repeat(${size}, 10px)`;
@@ -161,26 +163,26 @@ function genGrid(size) {
 const sizeInput = document.querySelector('#size-input');
 let size;
 function getWH() {
-    const maxWH = 70;   //number
+    const maxWH = 50;   //number
     const minWH = 10;   //number
 
     //use input box to get size
     sizeInput.addEventListener('keyup', (e) => {
         if (e.key === 'Enter') {
             size = Number(sizeInput.value);
-            console.log(typeof(size));
+            // console.log(typeof(size));
             if (size >= minWH && size <= maxWH) {
-                console.log(size);
-                return size;
+                // console.log(size);
+                genGrid(size);
             }
         }
     });
 
-    // // use popup to get size
+    // //use popup to get size
     // while (!(size <= maxWH && size >= minWH)) {
     //     size = Number(prompt('? x ?'));
     // }
-    // return size;
+    // // return size;
 
 }
 
@@ -191,11 +193,9 @@ function getWH() {
 //start sketching...
 function startSketch() {
     //get width/height...
-    //TODO getWH() uncomment after debug
     getWH();
     //generate grid...
-    //TODO 40 --> size after debug
-    genGrid(size);
+    // genGrid(size);
     //initiate draw...
     initDraw();
 }
