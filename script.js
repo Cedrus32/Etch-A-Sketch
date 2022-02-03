@@ -124,9 +124,9 @@ function initDraw() {
     checkDrawOn();
 }
 
-// --------------------- //
-// MANIPULATE GRID ITEMS //
-// --------------------- //
+// ------------- //
+// GENERATE GRID //
+// ------------- //
 
 ///...layout grid structure
 function layoutGrid(gridWH, itemSize) {
@@ -157,9 +157,9 @@ function createItems() {
     return gridItems;
 }
 
-// ------------- //
-// GENERATE GRID //
-// ------------- //
+// --------------- //
+// START SKETCHING //
+// --------------- //
 
 const gridContainer = document.querySelector('div.grid-container');
 const sizeInput = document.querySelector('#size-input'); //from slider
@@ -184,10 +184,6 @@ function genGrid() {
     createItems(gridWH);
     layoutGrid(gridWH, itemSize);
 }
-
-// --------------- //
-// START SKETCHING //
-// --------------- //
 
 genGrid();
 initDraw();
