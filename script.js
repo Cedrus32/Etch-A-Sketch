@@ -124,9 +124,9 @@ function initDraw() {
     checkDrawOn();
 }
 
-// ------------- //
-// GENERATE GRID //
-// ------------- //
+// ----------------- //
+// CREATE GRID ITEMS //
+// ----------------- //
 
 ///...layout grid structure
 function layoutGrid(gridWH, itemSize) {
@@ -134,13 +134,14 @@ function layoutGrid(gridWH, itemSize) {
     gridContainer.style.gridTemplateRows = `repeat(${gridWH}, ${itemSize}px)`;
 }
 
+//...clear grid items
 function clearItems() {
     while (gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.firstChild);
     }
 }
 
-//...create grid items & capture gridItem nodeList
+//...create grid items & capture gridItem nodeList...
 function createItems() {
     clearItems();
     itemSize = (500 / gridWH);
@@ -157,9 +158,9 @@ function createItems() {
     return gridItems;
 }
 
-// --------------- //
-// START SKETCHING //
-// --------------- //
+// ---------------------------------------- //
+// CREATE INITIAL GRID, LISTEN FOR NEW GRID //
+// ---------------------------------------- //
 
 const gridContainer = document.querySelector('div.grid-container');
 const sizeInput = document.querySelector('#size-input'); //from slider
@@ -167,7 +168,7 @@ const sliderThumb = document.querySelector('input.slider::-webkit-slider-thumb')
 let gridWH = Number(sizeInput.value); //# items >>/vv
 let itemSize;
 
-//...listen for new size
+//...listen for new size...
 sizeInput.addEventListener('mouseup', () => {
     // use slider to get size
     gridWH = Number(sizeInput.value);
@@ -178,12 +179,16 @@ sizeInput.addEventListener('mouseup', () => {
     //initiate draw...
 });
 
-//...generate grid...
+//...generate initial grid...
 function genGrid() {
     gridWH = sizeInput.value;
     createItems(gridWH);
     layoutGrid(gridWH, itemSize);
 }
+
+// --------------- //
+// START SKETCHING //
+// --------------- //
 
 genGrid();
 initDraw();
