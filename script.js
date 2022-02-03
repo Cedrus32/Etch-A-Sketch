@@ -14,6 +14,7 @@ function clearGrid() {
         gridItem.style.backgroundColor = '';
         gridItem.removeEventListener('mouseenter', startDraw);
     });
+    gridContainer.classList.remove('drawOn');
     drawOn = false;
 }
 
@@ -47,8 +48,8 @@ function startDraw(e) {
 
 //...toggle draw
 function toggleDraw() {
-    gridContainer.classList.toggle('draw');
-    drawOn = gridContainer.classList.contains('draw');
+    gridContainer.classList.toggle('drawOn');
+    drawOn = gridContainer.classList.contains('drawOn');
     return drawOn
 }
 
