@@ -123,9 +123,9 @@ function initDraw() {
     checkDrawOn();
 }
 
-// ------------- //
-// GENERATE GRID //
-// ------------- //
+// --------------------- //
+// MANIPULATE GRID ITEMS //
+// --------------------- //
 
 ///...layout grid structure
 function layoutGrid(gridWH, itemSize) {
@@ -133,9 +133,15 @@ function layoutGrid(gridWH, itemSize) {
     gridContainer.style.gridTemplateRows = `repeat(${gridWH}, ${itemSize}px)`;
 }
 
+function clearItems() {
+    while (gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.firstChild);
+    }
+}
+
 //...create grid items & capture gridItem nodeList
-let itemSize;
 function createItems() {
+    clearItems();
     itemSize = (500 / gridWH);
     gridSize = (gridWH ** 2);
     for (let i = 1; i <= gridSize; i++) {
@@ -150,28 +156,37 @@ function createItems() {
     return gridItems;
 }
 
-//...generate grid...
+// ------------- //
+// GENERATE GRID //
+// ------------- //
+
 const gridContainer = document.querySelector('div.grid-container');
 const sizeInput = document.querySelector('#size-input'); //from slider
 const sliderThumb = document.querySelector('input.slider::-webkit-slider-thumb');
-let gridWH; //# items >>/vv
+let gridWH = Number(sizeInput.value); //# items >>/vv
+let itemSize;
+
+//...listen for new size
+sizeInput.addEventListener('mouseup', () => {
+    // use slider to get size
+    gridWH = Number(sizeInput.value);
+    // create gridItems, append to gridContainer...
+    createItems(gridWH);
+    //layout items in grid...
+    layoutGrid(gridWH, itemSize);
+    //initiate draw...
+});
+
+//...generate grid...
 function genGrid() {
-    sizeInput.addEventListener('mouseup', (e) => {
-        //TODO clear grid when changing size
-        //use slider to get size
-        gridWH = Number(sizeInput.value);
-        //create gridItems, append to gridContainer...
-        createItems(gridWH);
-        //layout items in grid...
-        layoutGrid(gridWH, itemSize);
-        //initiate draw...
-        //TODO add default state of 50 gridWH
-        initDraw();
-    });
+    gridWH = sizeInput.value;
+    createItems(gridWH);
+    layoutGrid(gridWH, itemSize);
 }
 
 // --------------- //
 // START SKETCHING //
 // --------------- //
 
-let start = genGrid();
+genGrid();
+initDraw();
