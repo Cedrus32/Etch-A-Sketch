@@ -1,6 +1,56 @@
+//TODO deselect buttons when changing grid size
+
 // ------------ //
 // DRAW EFFECTS //
 // ------------ //
+
+let color;
+let colors = ['#000000',
+        '#A69C8A',
+        '#FFFEE1',
+        '#322A91',
+        '#9166F1',
+        '#6A2E32',
+        '#B43330',
+        '#BC4DA3',
+        '#D9747A',
+        '#E893D2',
+        '#4B3C26',
+        '#514F43',
+        '#A16529',
+        '#EBBB97',
+        '#AA9E46',
+        '#DA5425',
+        '#E68C3B',
+        '#EFB741',
+        '#FFE06D',
+        '#3A4743',
+        '#2B5D37',
+        '#5E8628',
+        '#B7CB40',
+        '#3B7E7D',
+        '#5ABFA6',
+        '#3259ED',
+        '#202629',
+        '#2E5670',
+        '#65A0CF',
+        '#C8DAD0',
+]
+
+function colorRainbow() {
+    color = colors[Math.floor(Math.random() * colors.length)]
+}
+
+//...draw in rainbow color
+function drawRainbow(e) {
+    colorRainbow();
+    e.target.style.backgroundColor = color;
+}
+
+//...draw in picker color
+function drawPicker(e) {
+    e.target.style.backgroundColor = 'white';
+}
 
 //...erase color
 function drawErase(e) {
@@ -16,16 +66,6 @@ function clearGrid() {
     });
     gridContainer.classList.remove('drawOn');
     drawOn = false;
-}
-
-//...draw in rainbow color
-function drawRainbow(e) {
-    e.target.style.backgroundColor = 'red';
-}
-
-//...draw in picker color
-function drawPicker(e) {
-    e.target.style.backgroundColor = 'white';
 }
 
 // --------------- //
@@ -55,9 +95,9 @@ function toggleDraw() {
 
 //...check draw on...
 let mode;
-let color;
+// let color;
 let drawOn = false;
-let clear;
+// let clear;
 function checkDrawOn() {
     //DRAWON FALSEY BY DEFAULT
     gridContainer.addEventListener('click', () => {
@@ -92,21 +132,21 @@ function getMode() {
     //listen for erase & draw in '' (erase)
     btnErase.addEventListener('click', () => {
         mode = 'erase';
-        color = ''
+        // color = ''
         selectButton(0);
     });
     
     //listen for picker & draw in picker color...
     btnPicker.addEventListener('click', () => {
         mode = 'picker';
-        color = '"white"';
+        // color = '"white"';
         selectButton(1);
     });
 
     //listen for rainbow & draw in rainbow color...
     btnRainbow.addEventListener('click', () => {
         mode = 'rainbow';
-        color = '"red"';
+        // color = '"red"';
         selectButton(2);
     });
     
