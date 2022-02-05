@@ -37,19 +37,31 @@ let colors = ['#000000',
         '#C8DAD0',
 ]
 
-function colorRainbow() {
+//...select random color from colors[]
+function getRandColor() {
     color = colors[Math.floor(Math.random() * colors.length)]
 }
 
-//...draw in rainbow color
+//...draw in rainbow color...
 function drawRainbow(e) {
-    colorRainbow();
+    getRandColor();
     e.target.style.backgroundColor = color;
 }
 
-//...draw in picker color
+//todo incorporate into script
+//...pick color from palette
+function getPalColor() {
+    console.log('getPalColor()');
+    //todo add default '' backgroundColor
+    //todo --> draw does not work until color is picked
+    pickerCells.forEach(cell => cell.addEventListener('click', (e) => {
+        console.log(e.target.style.backgroundColor);
+    }));
+}
+
+//...draw in picker color...
 function drawPicker(e) {
-    e.target.style.backgroundColor = 'white';
+    e.target.style.backgroundColor = color;
 }
 
 //...erase color
@@ -141,6 +153,7 @@ function getMode() {
         mode = 'picker';
         // color = '"white"';
         selectButton(1);
+        //todo togglePicker();
     });
 
     //listen for rainbow & draw in rainbow color...
@@ -148,6 +161,7 @@ function getMode() {
         mode = 'rainbow';
         // color = '"red"';
         selectButton(2);
+        //todo togglePicker();
     });
     
     //listen for clear & clear grid/reset draw...
@@ -162,6 +176,23 @@ function initDraw() {
     getMode();
     //toggle draw...
     checkDrawOn();
+}
+
+// ------------------- //
+// CREATE PICKER TABLE //
+// ------------------- //
+
+//...create picker table...
+const pickerTable = document.querySelector('tr');
+function createPickerTable() {
+    for (let i = 0; i < colors.length; i++) {
+        let pickerCell = document.createElement('td');
+        pickerCell.style.backgroundColor = colors[i];
+        pickerCell.addEventListener('click', getPalColor);
+        pickerTable.appendChild(pickerCell);
+    }
+    pickerCells = pickerTable.querySelectorAll('td');
+    return pickerCells;
 }
 
 // ----------------- //
@@ -224,6 +255,7 @@ function genGrid() {
     gridWH = sizeInput.value;
     createItems(gridWH);
     layoutGrid(gridWH, itemSize);
+    createPickerTable();
 }
 
 // --------------- //

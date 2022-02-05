@@ -117,16 +117,13 @@ button:active {
 
 table {
     border-spacing: 0px;
-    /* position: relative;
-    top: -25px; */
+    border: 1px solid #E6563F;
 }
 
 td {
     font-size: 6px;
     width: 16px; height: 16px;
     padding: 0px; margin: 0px;
-    border: 1px solid black;
-    border-collapse: collapse;
 }
 
 /* ---- */
