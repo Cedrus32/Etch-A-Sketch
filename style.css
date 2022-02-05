@@ -37,7 +37,7 @@ body {
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    padding: 20px; margin: 0px;
+    padding: 20px 0px; margin: 0px;
     font-family: 'Sacramento', 'helvetica', sans-serif;
     font-size: 30px;
     font-weight: lighter;
@@ -109,6 +109,24 @@ button:active {
     border-style: none;
     border-radius: 5px;
     color: white;
+}
+
+/* ---------------- */
+/* HEADER -- PICKER */
+/* ---------------- */
+
+table {
+    border-spacing: 0px;
+    /* position: relative;
+    top: -25px; */
+}
+
+td {
+    font-size: 6px;
+    width: 16px; height: 16px;
+    padding: 0px; margin: 0px;
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 
 /* ---- */
