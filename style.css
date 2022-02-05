@@ -126,6 +126,10 @@ td {
     padding: 0px; margin: 0px;
 }
 
+.hide {
+    opacity: 0.0;
+}
+
 /* ---- */
 /* GRID */
 /* ---- */

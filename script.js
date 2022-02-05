@@ -48,17 +48,6 @@ function drawRainbow(e) {
     e.target.style.backgroundColor = color;
 }
 
-//todo incorporate into script
-//...pick color from palette
-function getPalColor() {
-    console.log('getPalColor()');
-    //todo add default '' backgroundColor
-    //todo --> draw does not work until color is picked
-    pickerCells.forEach(cell => cell.addEventListener('click', (e) => {
-        console.log(e.target.style.backgroundColor);
-    }));
-}
-
 //...draw in picker color...
 function drawPicker(e) {
     e.target.style.backgroundColor = color;
@@ -88,7 +77,9 @@ function clearGrid() {
 function startDraw(e) {
     switch (mode) {
         case 'picker':
-            drawPicker(e);
+            if (!(color === '')) {
+                drawPicker(e);
+            }
             break;
         case 'rainbow':
             drawRainbow(e);
@@ -129,6 +120,7 @@ function checkDrawOn() {
     });
 }
 
+//...select button
 const btns = document.querySelectorAll('button');
 function selectButton(btnNum) {
     btns.forEach(btn => btn.setAttribute('class', ''));
@@ -144,29 +136,29 @@ function getMode() {
     //listen for erase & draw in '' (erase)
     btnErase.addEventListener('click', () => {
         mode = 'erase';
-        // color = ''
         selectButton(0);
+        pickerContainer.classList.add('hide');
     });
     
     //listen for picker & draw in picker color...
     btnPicker.addEventListener('click', () => {
         mode = 'picker';
-        // color = '"white"';
         selectButton(1);
-        //todo togglePicker();
+        color = '';
+        pickerContainer.setAttribute('class', '');
     });
 
     //listen for rainbow & draw in rainbow color...
     btnRainbow.addEventListener('click', () => {
         mode = 'rainbow';
-        // color = '"red"';
         selectButton(2);
-        //todo togglePicker();
+        pickerContainer.classList.add('hide');
     });
     
     //listen for clear & clear grid/reset draw...
     btnClear.addEventListener('click', () => {
         clearGrid();
+        pickerContainer.classList.add('hide');
     });
 }
 
@@ -183,12 +175,18 @@ function initDraw() {
 // ------------------- //
 
 //...create picker table...
+const pickerContainer = document.querySelector('div.picker');
+pickerContainer.classList.add('hide');
+console.log(pickerContainer.classList);
 const pickerTable = document.querySelector('tr');
 function createPickerTable() {
     for (let i = 0; i < colors.length; i++) {
         let pickerCell = document.createElement('td');
         pickerCell.style.backgroundColor = colors[i];
-        pickerCell.addEventListener('click', getPalColor);
+        pickerCell.addEventListener('click', (e) => {
+            console.log(e.target);
+            color = e.target.style.backgroundColor;
+        });
         pickerTable.appendChild(pickerCell);
     }
     pickerCells = pickerTable.querySelectorAll('td');
