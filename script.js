@@ -1,4 +1,5 @@
 //TODO deselect buttons when changing grid size
+//TODO add highlight to selected palette color
 
 // ------------ //
 // DRAW EFFECTS //
@@ -120,6 +121,25 @@ function checkDrawOn() {
     });
 }
 
+//...toggle pickerCell highlight
+let cellArray = [];
+console.log(cellArray);
+function togglePickerHL() {
+    pickerTable.addEventListener('click', (e) => {
+        //load targets into cellArray
+        cellArray.unshift(e.target);
+        if (cellArray.length === 1) {
+            //toggle first target
+            cellArray[0].classList.toggle('colorOn');
+        } else if (cellArray.length === 2) {
+            //target first/second targets
+            cellArray[0].classList.toggle('colorOn');
+            cellArray[1].classList.toggle('colorOn');
+            cellArray.pop();
+        }
+    });
+}
+
 //...select button
 const btns = document.querySelectorAll('button');
 function selectButton(btnNum) {
@@ -144,7 +164,7 @@ function getMode() {
     btnPicker.addEventListener('click', () => {
         mode = 'picker';
         selectButton(1);
-        color = '';
+        // color = '';
         pickerContainer.setAttribute('class', '');
     });
 
@@ -166,6 +186,8 @@ function getMode() {
 function initDraw() {
     //listen for draw effects...
     getMode();
+    //toggle pickerCell highlight...
+    togglePickerHL();
     //toggle draw...
     checkDrawOn();
 }
@@ -177,14 +199,13 @@ function initDraw() {
 //...create picker table...
 const pickerContainer = document.querySelector('div.picker');
 pickerContainer.classList.add('hide');
-console.log(pickerContainer.classList);
 const pickerTable = document.querySelector('tr');
 function createPickerTable() {
     for (let i = 0; i < colors.length; i++) {
         let pickerCell = document.createElement('td');
         pickerCell.style.backgroundColor = colors[i];
         pickerCell.addEventListener('click', (e) => {
-            console.log(e.target);
+            //get picker color
             color = e.target.style.backgroundColor;
         });
         pickerTable.appendChild(pickerCell);
