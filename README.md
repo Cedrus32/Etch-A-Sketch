@@ -2,4 +2,4 @@
 
 Completed through the Odin Project
 
-https://cedrus32.github.io/odin-etch-a-sketch/
+https://cedrus32.github.io/Etch-A-Sketch/
