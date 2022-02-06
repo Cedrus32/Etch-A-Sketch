@@ -37,7 +37,7 @@ body {
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    padding: 20px; margin: 0px;
+    padding: 20px 0px; margin: 0px;
     font-family: 'Sacramento', 'helvetica', sans-serif;
     font-size: 30px;
     font-weight: lighter;
@@ -111,6 +111,29 @@ button:active {
     color: white;
 }
 
+/* ---------------- */
+/* HEADER -- PICKER */
+/* ---------------- */
+
+table {
+    border-spacing: 0px;
+    border: 1px solid #E6563F;
+}
+
+td {
+    font-size: 6px;
+    width: 16px; height: 16px;
+    padding: 0px; margin: 0px;
+}
+
+.hide {
+    opacity: 0.0;
+}
+
+.colorOn {
+    box-shadow: 0px 0px 5px 1px rgba(255, 255, 255, 0.40);
+}
+
 /* ---- */
 /* GRID */
 /* ---- */
@@ -144,18 +167,6 @@ button:active {
 .drawOn {
     box-shadow: 0px 0px 5px 1px rgba(255, 255, 255, 0.40);
 }
-
-/* ------- */
-/* EFFECTS */
-/* ------- */
-
-/* .picker-bg {
-    background-color: white;
-}
-
-.rainbow-bg {
-    background-color: red;
-} */
 
 /* ------------ */
 /* CUSTOM FONTS */
