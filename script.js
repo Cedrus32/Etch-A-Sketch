@@ -1,5 +1,4 @@
 //TODO deselect buttons when changing grid size
-//TODO add highlight to selected palette color
 
 // ------------ //
 // DRAW EFFECTS //
@@ -123,21 +122,20 @@ function checkDrawOn() {
 
 //...toggle pickerCell highlight
 let cellArray = [];
-console.log(cellArray);
 function togglePickerHL() {
     pickerTable.addEventListener('click', (e) => {
-        //load targets into cellArray
-        cellArray.unshift(e.target);
-        if (cellArray.length === 1) {
-            //toggle first target
-            cellArray[0].classList.toggle('colorOn');
-        } else if (cellArray.length === 2) {
-            //target first/second targets
-            cellArray[0].classList.toggle('colorOn');
-            cellArray[1].classList.toggle('colorOn');
-            cellArray.pop();
-        }
-    });
+            //load targets into cellArray
+            cellArray.unshift(e.target);
+            if (cellArray.length === 1) {
+                //toggle first target
+                cellArray[0].classList.toggle('colorOn');
+            } else if (cellArray.length === 2) {
+                //target first/second targets
+                cellArray[0].classList.toggle('colorOn');
+                cellArray[1].classList.toggle('colorOn');
+                cellArray.pop();
+            }
+        });
 }
 
 //...select button
@@ -164,7 +162,7 @@ function getMode() {
     btnPicker.addEventListener('click', () => {
         mode = 'picker';
         selectButton(1);
-        // color = '';
+        color = '';
         pickerContainer.setAttribute('class', '');
     });
 
@@ -200,6 +198,7 @@ function initDraw() {
 const pickerContainer = document.querySelector('div.picker');
 pickerContainer.classList.add('hide');
 const pickerTable = document.querySelector('tr');
+let pickerCells;
 function createPickerTable() {
     for (let i = 0; i < colors.length; i++) {
         let pickerCell = document.createElement('td');
@@ -266,7 +265,17 @@ sizeInput.addEventListener('mouseup', () => {
     createItems(gridWH);
     //layout items in grid...
     layoutGrid(gridWH, itemSize);
-    //initiate draw...
+    //clear interface selection...
+    //reset buttons
+    btns.forEach(btn => btn.setAttribute('class', ''));
+    //reset drawOn
+    gridContainer.classList.remove('drawOn');
+    drawOn = false;
+    //reset picker color & highlight
+    color = '';
+    pickerCells = pickerTable.querySelectorAll('td');
+    pickerCells.forEach(td => td.setAttribute('class', ''));
+    pickerContainer.classList.add('hide');
 });
 
 //...generate initial grid...
