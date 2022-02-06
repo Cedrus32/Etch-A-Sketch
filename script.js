@@ -1,5 +1,3 @@
-//TODO deselect buttons when changing grid size
-
 // ------------ //
 // DRAW EFFECTS //
 // ------------ //
@@ -155,7 +153,8 @@ function getMode() {
     btnErase.addEventListener('click', () => {
         mode = 'erase';
         selectButton(0);
-        pickerContainer.classList.add('hide');
+        color = '';
+        resetPicker();
     });
     
     //listen for picker & draw in picker color...
@@ -170,13 +169,13 @@ function getMode() {
     btnRainbow.addEventListener('click', () => {
         mode = 'rainbow';
         selectButton(2);
-        pickerContainer.classList.add('hide');
+        resetPicker();
     });
     
     //listen for clear & clear grid/reset draw...
     btnClear.addEventListener('click', () => {
         clearGrid();
-        pickerContainer.classList.add('hide');
+        resetPicker();
     });
 }
 
@@ -198,7 +197,6 @@ function initDraw() {
 const pickerContainer = document.querySelector('div.picker');
 pickerContainer.classList.add('hide');
 const pickerTable = document.querySelector('tr');
-let pickerCells;
 function createPickerTable() {
     for (let i = 0; i < colors.length; i++) {
         let pickerCell = document.createElement('td');
@@ -209,8 +207,6 @@ function createPickerTable() {
         });
         pickerTable.appendChild(pickerCell);
     }
-    pickerCells = pickerTable.querySelectorAll('td');
-    return pickerCells;
 }
 
 // ----------------- //
@@ -256,6 +252,16 @@ const sizeInput = document.querySelector('#size-input'); //from slider
 let gridWH = Number(sizeInput.value); //# items >>/vv
 let itemSize;
 
+function resetPicker() {
+    color = '';
+    let pickerCells = pickerTable.querySelectorAll('td');
+    pickerCells.forEach(td => td.setAttribute('class', ''));
+    pickerContainer.classList.add('hide');
+    for (let i = 0; i <= cellArray.length; i++) {
+        cellArray.pop();
+    }
+}
+
 //...listen for new size...
 sizeInput.addEventListener('mouseup', () => {
     // use slider to get size
@@ -271,10 +277,7 @@ sizeInput.addEventListener('mouseup', () => {
     gridContainer.classList.remove('drawOn');
     drawOn = false;
     //reset picker color & highlight
-    color = '';
-    pickerCells = pickerTable.querySelectorAll('td');
-    pickerCells.forEach(td => td.setAttribute('class', ''));
-    pickerContainer.classList.add('hide');
+    resetPicker();
 });
 
 //...generate initial grid...
