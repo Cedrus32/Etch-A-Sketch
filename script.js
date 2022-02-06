@@ -253,7 +253,6 @@ function createItems() {
 
 const gridContainer = document.querySelector('div.grid-container');
 const sizeInput = document.querySelector('#size-input'); //from slider
-// const sliderThumb = document.querySelector('input.slider::-webkit-slider-thumb');
 let gridWH = Number(sizeInput.value); //# items >>/vv
 let itemSize;
 
